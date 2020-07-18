@@ -4,9 +4,9 @@ let sanitizeHTML = require('sanitize-html');
 
 let app = express();
 let db;
-let port = process.env.port
+let port = process.env.PORT
 if(port == null || port == ""){
-  port == 7329;
+  port = 7329;
 }
 app.use(express.static('public'));
 let connectionString = 'mongodb+srv://katbinUser01:myKatbinUser01@Mango@cluster0.cbcb8.mongodb.net/katbinTodoApp?retryWrites=true&w=majority';
@@ -20,8 +20,8 @@ app.use(express.urlencoded({extended: false}));
 
 function passwordProtected(req, res, next){
  res.set('WWW-Authenticate', 'Basic realm="Simple Todo App"');
- console.log(req.headers.authorization);
- if(req.headers.authorization == "Basic TWFkZWxlaW5lOlRpcnphaEJpbmVuZQ=="){
+ //console.log(req.headers.authorization);
+ if(req.headers.authorization == "Basic a2F0YmluMjAyMDpteUphdmFzY3JpcHQyMC0yMA=="){
    next();
  }else{
    res.status(401).send("Authentication required");
